@@ -651,6 +651,12 @@ class Config
 
             // Repeating fields checks
             if ($field['type'] === 'repeater') {
+
+                // If the hint is not specifically set, grab the first field
+                if(!empty($field['collapsed_hint'])) {
+                    $field['collapsed_hint'] = key($field['fields']);
+                }
+
                 $fields[$key] = $this->parseFieldRepeaters($fields, $key);
                 if ($fields[$key] === null) {
                     unset($fields[$key]);
